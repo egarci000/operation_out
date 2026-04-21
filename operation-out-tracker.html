@@ -1,0 +1,2866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operation: Out — 26-Week Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0e0c;
+  --bg-panel: #17161300;
+  --bg-panel-solid: #1a1916;
+  --ink: #e8e4d8;
+  --ink-dim: #8a8578;
+  --ink-faint: #56534a;
+  --rule: #2a2824;
+  --accent: #d4a24c;
+  --accent-dim: #8a6a33;
+  --work: #8a5a3a;
+  --off: #4a7a5a;
+  --phase1: #5a7a8a;
+  --phase2: #8a7a4a;
+  --phase3: #a06a3a;
+  --phase4: #a04a3a;
+  --run: #c96a4a;
+  --strength: #7a9aa8;
+  --rower: #8aa878;
+  --longrun: #d4a24c;
+  --rest: #56534a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(212,162,76,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(122,154,168,0.03) 0%, transparent 40%);
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.85 0 0 0 0 0.75 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0; opacity: 0.6;
+}
+main { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 32px 24px 120px; }
+
+/* Header */
+.hdr { border-top: 3px solid var(--accent); padding-top: 24px; margin-bottom: 40px; }
+.hdr-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--ink-dim); text-transform: uppercase; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.hdr h1 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(42px, 7vw, 76px); line-height: 0.95; margin-top: 16px; letter-spacing: -0.02em; color: var(--ink); }
+.hdr h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+.hdr .tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-dim); margin-top: 20px; max-width: 640px; border-left: 2px solid var(--accent-dim); padding-left: 14px; }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--rule); margin: 40px 0; border: 1px solid var(--rule); }
+.stat { background: var(--bg); padding: 20px 18px; }
+.stat-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; }
+.stat-val { font-family: 'Fraunces', serif; font-weight: 600; font-size: 34px; color: var(--ink); margin-top: 6px; letter-spacing: -0.02em; }
+.stat-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); margin-top: 2px; }
+
+/* Phase bar */
+.phase-bar { margin: 40px 0 32px; }
+.phase-bar-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--ink-dim); text-transform: uppercase; margin-bottom: 12px; }
+.phase-track { display: grid; grid-template-columns: 28fr 42fr 56fr 57fr; gap: 2px; height: 56px; }
+.phase-seg { padding: 8px 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink); display: flex; flex-direction: column; justify-content: space-between; }
+.phase-seg:nth-child(1) { background: var(--phase1); }
+.phase-seg:nth-child(2) { background: var(--phase2); }
+.phase-seg:nth-child(3) { background: var(--phase3); }
+.phase-seg:nth-child(4) { background: var(--phase4); }
+.phase-seg .p-num { font-weight: 700; }
+.phase-seg .p-name { opacity: 0.85; }
+
+/* Goals */
+.goals { margin: 48px 0; border: 1px solid var(--rule); background: rgba(26,25,22,0.6); }
+.goals-hdr { padding: 14px 20px; background: var(--rule); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); }
+.goals table { width: 100%; border-collapse: collapse; }
+.goals td, .goals th { padding: 12px 20px; text-align: left; border-bottom: 1px solid var(--rule); font-size: 14px; }
+.goals th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; font-weight: 400; }
+.goals tr:last-child td { border-bottom: none; }
+.goals .event { font-family: 'Fraunces', serif; font-size: 17px; }
+.goals .goal { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+.goals .min, .goals .max { color: var(--ink-dim); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+
+/* Controls */
+.controls { display: flex; gap: 8px; margin: 40px 0 24px; flex-wrap: wrap; align-items: center; }
+.controls button { background: transparent; color: var(--ink-dim); border: 1px solid var(--rule); padding: 8px 14px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.15s; }
+.controls button:hover { border-color: var(--accent); color: var(--ink); }
+.controls button.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.jump { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.jump input { background: var(--bg-panel-solid); border: 1px solid var(--rule); color: var(--ink); padding: 8px 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+/* Week group */
+.week { margin-bottom: 48px; border-top: 1px solid var(--rule); padding-top: 24px; scroll-margin-top: 20px; }
+.week-hdr { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; flex-wrap: wrap; gap: 12px; }
+.week-num { font-family: 'Fraunces', serif; font-weight: 600; font-size: 28px; letter-spacing: -0.01em; }
+.week-num em { font-style: normal; color: var(--accent); }
+.week-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.week-progress { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); }
+
+/* Day card */
+.day { background: rgba(26,25,22,0.4); border-left: 3px solid var(--ink-faint); padding: 16px 20px; margin-bottom: 6px; display: grid; grid-template-columns: 110px 1fr auto; gap: 20px; align-items: start; transition: all 0.15s; }
+.day:hover { background: rgba(26,25,22,0.8); }
+.day.work { border-left-color: var(--work); }
+.day.off { border-left-color: var(--off); }
+.day.today { border-left-color: var(--accent); background: rgba(212,162,76,0.06); }
+.day.complete { opacity: 0.55; }
+.day.complete .day-date { color: var(--ink-faint); }
+
+.day-date { display: flex; flex-direction: column; gap: 4px; }
+.day-dow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; }
+.day-day { font-family: 'Fraunces', serif; font-weight: 600; font-size: 22px; line-height: 1; }
+.day-month { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-dim); letter-spacing: 0.15em; text-transform: uppercase; }
+.day-status { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; padding: 2px 6px; margin-top: 4px; text-transform: uppercase; width: fit-content; }
+.day-status.work-tag { background: rgba(138,90,58,0.2); color: #d49a7a; border: 1px solid rgba(138,90,58,0.4); }
+.day-status.off-tag { background: rgba(74,122,90,0.2); color: #8ac09a; border: 1px solid rgba(74,122,90,0.4); }
+
+.day-tasks { display: flex; flex-direction: column; gap: 10px; }
+.task { display: flex; gap: 10px; align-items: flex-start; }
+.task-check { flex-shrink: 0; margin-top: 2px; }
+.task-check input { appearance: none; width: 16px; height: 16px; border: 1px solid var(--ink-faint); background: transparent; cursor: pointer; position: relative; transition: all 0.15s; }
+.task-check input:hover { border-color: var(--accent); }
+.task-check input:checked { background: var(--accent); border-color: var(--accent); }
+.task-check input:checked::after { content: "✓"; position: absolute; top: -3px; left: 2px; color: var(--bg); font-size: 13px; font-weight: 700; }
+.task-body { flex: 1; }
+.task-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2px; font-weight: 700; }
+.task.training .task-label { color: var(--accent); }
+.task.project .task-label { color: #8aa878; }
+.task.job .task-label { color: #d49a7a; }
+.task-text { font-size: 14px; line-height: 1.45; color: var(--ink); }
+.task.done .task-text { text-decoration: line-through; color: var(--ink-faint); }
+
+.day-kind { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 8px; height: fit-content; text-align: center; min-width: 80px; }
+.k-RUN { background: rgba(201,106,74,0.15); color: #e08a6a; border: 1px solid rgba(201,106,74,0.3); }
+.k-STRENGTH { background: rgba(122,154,168,0.15); color: #a0c0d0; border: 1px solid rgba(122,154,168,0.3); }
+.k-ROWER { background: rgba(138,168,120,0.15); color: #aac098; border: 1px solid rgba(138,168,120,0.3); }
+.k-LONG_RUN { background: rgba(212,162,76,0.15); color: var(--accent); border: 1px solid rgba(212,162,76,0.3); }
+.k-REST { background: rgba(86,83,74,0.3); color: var(--ink-dim); border: 1px solid var(--rule); }
+
+/* PT Log */
+.pt-log { margin: 48px 0; border: 1px solid var(--rule); padding: 24px; background: rgba(26,25,22,0.4); }
+.pt-log h2 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 24px; margin-bottom: 6px; }
+.pt-log p { color: var(--ink-dim); font-size: 13px; margin-bottom: 20px; }
+.pt-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.pt-field label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-faint); display: block; margin-bottom: 4px; }
+.pt-field input { width: 100%; background: var(--bg-panel-solid); border: 1px solid var(--rule); color: var(--ink); padding: 8px 10px; font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+.pt-field input:focus { outline: none; border-color: var(--accent); }
+.pt-log button { background: var(--accent); color: var(--bg); border: none; padding: 10px 18px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; font-weight: 700; }
+.pt-log button:hover { background: #e8b65a; }
+.pt-history { margin-top: 20px; display: grid; gap: 2px; max-height: 240px; overflow-y: auto; }
+.pt-entry { display: grid; grid-template-columns: 100px 1fr 1fr 1fr auto; gap: 12px; padding: 8px 12px; background: rgba(15,14,12,0.6); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.pt-entry .pt-date { color: var(--accent); }
+.pt-entry button { background: transparent; color: var(--ink-faint); border: none; font-size: 14px; padding: 0 4px; }
+.pt-entry button:hover { color: #e08a6a; }
+
+.pt-chart { margin-top: 20px; padding: 16px; background: var(--bg); border: 1px solid var(--rule); min-height: 180px; }
+
+/* Footer */
+footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.1em; text-transform: uppercase; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+@media (max-width: 680px) {
+  .day { grid-template-columns: 1fr; gap: 12px; }
+  .day-date { flex-direction: row; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .day-kind { align-self: flex-start; }
+  .hdr h1 { font-size: 42px; }
+  .phase-track { grid-template-columns: 1fr; height: auto; }
+  .phase-seg { padding: 10px 14px; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="hdr">
+    <div class="hdr-meta">
+      <span>// OPERATION : OUT</span>
+      <span id="today-stamp"></span>
+    </div>
+    <h1>Six months.<br><em>One exit.</em></h1>
+    <p class="tag">26-week roadmap. Fitness + projects + job hunt, mapped day-by-day to your rotation. If the job hunt works, you leave. If it doesn't, you're PT-test ready for the Air Force. Either way, you're out of the hospital by October.</p>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><div class="stat-label">Days Planned</div><div class="stat-val" id="stat-total">183</div><div class="stat-sub">Apr 21 → Oct 20</div></div>
+    <div class="stat"><div class="stat-label">Today Is Day</div><div class="stat-val" id="stat-today">—</div><div class="stat-sub" id="stat-today-sub">of 183</div></div>
+    <div class="stat"><div class="stat-label">Tasks Done</div><div class="stat-val" id="stat-done">0</div><div class="stat-sub" id="stat-done-pct">0%</div></div>
+    <div class="stat"><div class="stat-label">Current Phase</div><div class="stat-val" id="stat-phase">1</div><div class="stat-sub" id="stat-phase-name">Base Building</div></div>
+  </section>
+
+  <section class="phase-bar">
+    <div class="phase-bar-title">// Phase Map (width = weeks)</div>
+    <div class="phase-track">
+      <div class="phase-seg"><span class="p-num">01 / BASE</span><span class="p-name">Apr 21 – May 18 · 4w</span></div>
+      <div class="phase-seg"><span class="p-num">02 / BUILD</span><span class="p-name">May 19 – Jun 29 · 6w</span></div>
+      <div class="phase-seg"><span class="p-num">03 / SPECIFICITY</span><span class="p-name">Jun 30 – Aug 24 · 8w</span></div>
+      <div class="phase-seg"><span class="p-num">04 / PEAK + SHIP</span><span class="p-name">Aug 25 – Oct 20 · 8w</span></div>
+    </div>
+  </section>
+
+  <section class="goals">
+    <div class="goals-hdr">// PT Test Targets — Male, Under 25</div>
+    <table>
+      <thead><tr><th>Event</th><th>Fail Buffer</th><th>Your Goal</th><th>Max Score</th></tr></thead>
+      <tbody>
+        <tr><td class="event">2-Mile Run</td><td class="min">19:45</td><td class="goal">16:30</td><td class="max">13:25</td></tr>
+        <tr><td class="event">Push-Ups (1 min)</td><td class="min">33</td><td class="goal">50</td><td class="max">67</td></tr>
+        <tr><td class="event">Sit-Ups (1 min)</td><td class="min">42</td><td class="goal">55</td><td class="max">58</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="pt-log">
+    <h2>PT Benchmark Log</h2>
+    <p>Log a mock PT test every 2–4 weeks. Track the curve.</p>
+    <div class="pt-form">
+      <div class="pt-field"><label>Date</label><input type="date" id="pt-date"></div>
+      <div class="pt-field"><label>2-Mi Run (mm:ss)</label><input type="text" id="pt-run" placeholder="18:45"></div>
+      <div class="pt-field"><label>Push-Ups</label><input type="number" id="pt-push"></div>
+      <div class="pt-field"><label>Sit-Ups</label><input type="number" id="pt-sit"></div>
+    </div>
+    <button id="pt-save">Log Benchmark</button>
+    <div class="pt-chart" id="pt-chart"></div>
+    <div class="pt-history" id="pt-history"></div>
+  </section>
+
+  <div class="controls">
+    <button data-filter="all" class="active">All</button>
+    <button data-filter="current">Current Week</button>
+    <button data-filter="phase1">Phase 1</button>
+    <button data-filter="phase2">Phase 2</button>
+    <button data-filter="phase3">Phase 3</button>
+    <button data-filter="phase4">Phase 4</button>
+    <div class="jump">
+      <input type="date" id="jump-date" min="2026-04-21" max="2026-10-20">
+      <button id="jump-btn">Jump</button>
+    </div>
+  </div>
+
+  <section id="schedule"></section>
+
+  <footer>
+    <span>// Local progress saved automatically</span>
+    <span>v1.0 · Built for Esteban</span>
+  </footer>
+</main>
+
+<script>
+const DAYS = [
+  {
+    "date": "2026-04-21",
+    "display": "Tue Apr 21",
+    "weekday": "Tue",
+    "week": 1,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 3x8, DB Row 3x8, DB Shoulder Press 3x8, Goblet Squat 3x10. Then: 3 sets push-ups (60% max) + 3 sets sit-ups (60% max).",
+    "project": "C: control flow (if/else/while/for). Solve 1 small problem.",
+    "job": null
+  },
+  {
+    "date": "2026-04-22",
+    "display": "Wed Apr 22",
+    "weekday": "Wed",
+    "week": 1,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Rower: 20-25 min steady-state, Zone 2 (can hold conversation).",
+    "project": "C: functions & scope. Write one reusable function.",
+    "job": null
+  },
+  {
+    "date": "2026-04-23",
+    "display": "Thu Apr 23",
+    "weekday": "Thu",
+    "week": 1,
+    "phase": 1,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Run: 1-2 mi easy (conversational pace) + 5 min walk cooldown. Focus on form, not speed.",
+    "project": "C deep-dive session: combine week's concepts. Build small program (e.g., calculator).",
+    "job": null
+  },
+  {
+    "date": "2026-04-24",
+    "display": "Fri Apr 24",
+    "weekday": "Fri",
+    "week": 1,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 3x8, DB Row 3x8, DB Shoulder Press 3x8, Goblet Squat 3x10. Then: 3 sets push-ups (60% max) + 3 sets sit-ups (60% max).",
+    "project": "C: arrays. Basic manipulation exercise.",
+    "job": null
+  },
+  {
+    "date": "2026-04-25",
+    "display": "Sat Apr 25",
+    "weekday": "Sat",
+    "week": 1,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Long run/walk: 2-3 mi. Walk when needed. Build endurance base.",
+    "project": "C: pointers (intro). Read, take notes. Do 1 small exercise.",
+    "job": null
+  },
+  {
+    "date": "2026-04-26",
+    "display": "Sun Apr 26",
+    "weekday": "Sun",
+    "week": 1,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Rest day OR optional 15 min easy rower + stretch. Listen to your body.",
+    "project": "Radius: improve data cleaning script. Handle missing salaries.",
+    "job": null
+  },
+  {
+    "date": "2026-04-27",
+    "display": "Mon Apr 27",
+    "weekday": "Mon",
+    "week": 1,
+    "phase": 1,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Run: 1-2 mi easy (conversational pace) + 5 min walk cooldown. Focus on form, not speed.",
+    "project": "C deep-dive session: combine week's concepts. Build small program (e.g., calculator).",
+    "job": "Job hunt: start resume rewrite. No applications yet."
+  },
+  {
+    "date": "2026-04-28",
+    "display": "Tue Apr 28",
+    "weekday": "Tue",
+    "week": 2,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 3x8, DB Row 3x8, DB Shoulder Press 3x8, Goblet Squat 3x10. Then: 3 sets push-ups (60% max) + 3 sets sit-ups (60% max).",
+    "project": "C: control flow (if/else/while/for). Solve 1 small problem.",
+    "job": null
+  },
+  {
+    "date": "2026-04-29",
+    "display": "Wed Apr 29",
+    "weekday": "Wed",
+    "week": 2,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Rower: 20-25 min steady-state, Zone 2 (can hold conversation).",
+    "project": "C: functions & scope. Write one reusable function.",
+    "job": null
+  },
+  {
+    "date": "2026-04-30",
+    "display": "Thu Apr 30",
+    "weekday": "Thu",
+    "week": 2,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Run: 1-2 mi easy (conversational pace) + 5 min walk cooldown. Focus on form, not speed.",
+    "project": "Radius: review radius_customers_dirty.csv. List 5 data quality issues.",
+    "job": null
+  },
+  {
+    "date": "2026-05-01",
+    "display": "Fri May 01",
+    "weekday": "Fri",
+    "week": 2,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 3x8, DB Row 3x8, DB Shoulder Press 3x8, Goblet Squat 3x10. Then: 3 sets push-ups (60% max) + 3 sets sit-ups (60% max).",
+    "project": "C: arrays. Basic manipulation exercise.",
+    "job": null
+  },
+  {
+    "date": "2026-05-02",
+    "display": "Sat May 02",
+    "weekday": "Sat",
+    "week": 2,
+    "phase": 1,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Long run/walk: 2-3 mi. Walk when needed. Build endurance base.",
+    "project": "Weekly review: commit all work to GitHub. Update README. Plan next week.",
+    "job": null
+  },
+  {
+    "date": "2026-05-03",
+    "display": "Sun May 03",
+    "weekday": "Sun",
+    "week": 2,
+    "phase": 1,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Rest day OR optional 15 min easy rower + stretch. Listen to your body.",
+    "project": "C deep-dive session: combine week's concepts. Build small program (e.g., calculator).",
+    "job": "Job hunt: finish resume v1. Get feedback from 1 person."
+  },
+  {
+    "date": "2026-05-04",
+    "display": "Mon May 04",
+    "weekday": "Mon",
+    "week": 2,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Run: 1-2 mi easy (conversational pace) + 5 min walk cooldown. Focus on form, not speed.",
+    "project": "C: variables, types, printf/scanf. 1 exercise from K&R or Sandor Dargo.",
+    "job": null
+  },
+  {
+    "date": "2026-05-05",
+    "display": "Tue May 05",
+    "weekday": "Tue",
+    "week": 3,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 3x8, DB Row 3x8, DB Shoulder Press 3x8, Goblet Squat 3x10. Then: 3 sets push-ups (60% max) + 3 sets sit-ups (60% max).",
+    "project": "C: control flow (if/else/while/for). Solve 1 small problem.",
+    "job": null
+  },
+  {
+    "date": "2026-05-06",
+    "display": "Wed May 06",
+    "weekday": "Wed",
+    "week": 3,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Rower: 20-25 min steady-state, Zone 2 (can hold conversation).",
+    "project": "C: functions & scope. Write one reusable function.",
+    "job": null
+  },
+  {
+    "date": "2026-05-07",
+    "display": "Thu May 07",
+    "weekday": "Thu",
+    "week": 3,
+    "phase": 1,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Run: 1-2 mi easy (conversational pace) + 5 min walk cooldown. Focus on form, not speed.",
+    "project": "C deep-dive session: combine week's concepts. Build small program (e.g., calculator).",
+    "job": null
+  },
+  {
+    "date": "2026-05-08",
+    "display": "Fri May 08",
+    "weekday": "Fri",
+    "week": 3,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 3x8, DB Row 3x8, DB Shoulder Press 3x8, Goblet Squat 3x10. Then: 3 sets push-ups (60% max) + 3 sets sit-ups (60% max).",
+    "project": "C: arrays. Basic manipulation exercise.",
+    "job": null
+  },
+  {
+    "date": "2026-05-09",
+    "display": "Sat May 09",
+    "weekday": "Sat",
+    "week": 3,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Long run/walk: 2-3 mi. Walk when needed. Build endurance base.",
+    "project": "C: pointers (intro). Read, take notes. Do 1 small exercise.",
+    "job": null
+  },
+  {
+    "date": "2026-05-10",
+    "display": "Sun May 10",
+    "weekday": "Sun",
+    "week": 3,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Rest day OR optional 15 min easy rower + stretch. Listen to your body.",
+    "project": "Radius: improve data cleaning script. Handle missing salaries.",
+    "job": null
+  },
+  {
+    "date": "2026-05-11",
+    "display": "Mon May 11",
+    "weekday": "Mon",
+    "week": 3,
+    "phase": 1,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Run: 1-2 mi easy (conversational pace) + 5 min walk cooldown. Focus on form, not speed.",
+    "project": "C deep-dive session: combine week's concepts. Build small program (e.g., calculator).",
+    "job": null
+  },
+  {
+    "date": "2026-05-12",
+    "display": "Tue May 12",
+    "weekday": "Tue",
+    "week": 4,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 3x8, DB Row 3x8, DB Shoulder Press 3x8, Goblet Squat 3x10. Then: 3 sets push-ups (60% max) + 3 sets sit-ups (60% max).",
+    "project": "C: control flow (if/else/while/for). Solve 1 small problem.",
+    "job": null
+  },
+  {
+    "date": "2026-05-13",
+    "display": "Wed May 13",
+    "weekday": "Wed",
+    "week": 4,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Rower: 20-25 min steady-state, Zone 2 (can hold conversation).",
+    "project": "C: functions & scope. Write one reusable function.",
+    "job": null
+  },
+  {
+    "date": "2026-05-14",
+    "display": "Thu May 14",
+    "weekday": "Thu",
+    "week": 4,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Run: 1-2 mi easy (conversational pace) + 5 min walk cooldown. Focus on form, not speed.",
+    "project": "Radius: review radius_customers_dirty.csv. List 5 data quality issues.",
+    "job": null
+  },
+  {
+    "date": "2026-05-15",
+    "display": "Fri May 15",
+    "weekday": "Fri",
+    "week": 4,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 3x8, DB Row 3x8, DB Shoulder Press 3x8, Goblet Squat 3x10. Then: 3 sets push-ups (60% max) + 3 sets sit-ups (60% max).",
+    "project": "C: arrays. Basic manipulation exercise.",
+    "job": null
+  },
+  {
+    "date": "2026-05-16",
+    "display": "Sat May 16",
+    "weekday": "Sat",
+    "week": 4,
+    "phase": 1,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Long run/walk: 2-3 mi. Walk when needed. Build endurance base.",
+    "project": "Weekly review: commit all work to GitHub. Update README. Plan next week.",
+    "job": null
+  },
+  {
+    "date": "2026-05-17",
+    "display": "Sun May 17",
+    "weekday": "Sun",
+    "week": 4,
+    "phase": 1,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Rest day OR optional 15 min easy rower + stretch. Listen to your body.",
+    "project": "C deep-dive session: combine week's concepts. Build small program (e.g., calculator).",
+    "job": null
+  },
+  {
+    "date": "2026-05-18",
+    "display": "Mon May 18",
+    "weekday": "Mon",
+    "week": 4,
+    "phase": 1,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Run: 1-2 mi easy (conversational pace) + 5 min walk cooldown. Focus on form, not speed.",
+    "project": "C: variables, types, printf/scanf. 1 exercise from K&R or Sandor Dargo.",
+    "job": null
+  },
+  {
+    "date": "2026-05-19",
+    "display": "Tue May 19",
+    "weekday": "Tue",
+    "week": 5,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "C: memory management (malloc/free). Read + 1 exercise.",
+    "job": null
+  },
+  {
+    "date": "2026-05-20",
+    "display": "Wed May 20",
+    "weekday": "Wed",
+    "week": 5,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Rower intervals: 8x500m hard, 1 min rest. OR 30 min steady if legs are toast.",
+    "project": "C: strings. One exercise.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-05-21",
+    "display": "Thu May 21",
+    "weekday": "Thu",
+    "week": 5,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "Project deep work: Radius \u2014 implement ALTER TABLE changes (salary, likely_customer 1-5, phone, email, address fields). Create schema.sql, seed.sql, .env, add .env to .gitignore.",
+    "job": null
+  },
+  {
+    "date": "2026-05-22",
+    "display": "Fri May 22",
+    "weekday": "Fri",
+    "week": 5,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "C: file I/O. One exercise.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-05-23",
+    "display": "Sat May 23",
+    "weekday": "Sat",
+    "week": 5,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 2.5-3 mi continuous. Every OTHER Saturday: 2-mile time trial (hard).",
+    "project": "C wrap-up: small capstone (e.g., simple linked list).",
+    "job": null
+  },
+  {
+    "date": "2026-05-24",
+    "display": "Sun May 24",
+    "weekday": "Sun",
+    "week": 5,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Active recovery: 20 min easy rower + full stretch routine.",
+    "project": "Radius: feature engineering \u2014 create 2 new features (e.g., tenure_years, purchase_frequency).",
+    "job": null
+  },
+  {
+    "date": "2026-05-25",
+    "display": "Mon May 25",
+    "weekday": "Mon",
+    "week": 5,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "Project deep work: Radius \u2014 implement ALTER TABLE changes (salary, likely_customer 1-5, phone, email, address fields). Create schema.sql, seed.sql, .env, add .env to .gitignore.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-05-26",
+    "display": "Tue May 26",
+    "weekday": "Tue",
+    "week": 6,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "C: memory management (malloc/free). Read + 1 exercise.",
+    "job": null
+  },
+  {
+    "date": "2026-05-27",
+    "display": "Wed May 27",
+    "weekday": "Wed",
+    "week": 6,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Rower intervals: 8x500m hard, 1 min rest. OR 30 min steady if legs are toast.",
+    "project": "C: strings. One exercise.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-05-28",
+    "display": "Thu May 28",
+    "weekday": "Thu",
+    "week": 6,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "Radius: rerun Random Forest with cleaner features. Log results.",
+    "job": null
+  },
+  {
+    "date": "2026-05-29",
+    "display": "Fri May 29",
+    "weekday": "Fri",
+    "week": 6,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "C: file I/O. One exercise.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-05-30",
+    "display": "Sat May 30",
+    "weekday": "Sat",
+    "week": 6,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 2.5-3 mi continuous. Every OTHER Saturday: 2-mile time trial (hard).",
+    "project": "Weekly review: commit, update README, draft blog post notes.",
+    "job": null
+  },
+  {
+    "date": "2026-05-31",
+    "display": "Sun May 31",
+    "weekday": "Sun",
+    "week": 6,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Active recovery: 20 min easy rower + full stretch routine.",
+    "project": "Project deep work: Radius \u2014 implement ALTER TABLE changes (salary, likely_customer 1-5, phone, email, address fields). Create schema.sql, seed.sql, .env, add .env to .gitignore.",
+    "job": null
+  },
+  {
+    "date": "2026-06-01",
+    "display": "Mon Jun 01",
+    "weekday": "Mon",
+    "week": 6,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "C: structs. One exercise.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-02",
+    "display": "Tue Jun 02",
+    "weekday": "Tue",
+    "week": 7,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "Python: Pandas refresher. Load Radius data, groupby, merge.",
+    "job": null
+  },
+  {
+    "date": "2026-06-03",
+    "display": "Wed Jun 03",
+    "weekday": "Wed",
+    "week": 7,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Rower intervals: 8x500m hard, 1 min rest. OR 30 min steady if legs are toast.",
+    "project": "Python: matplotlib + seaborn. One chart from Radius.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-04",
+    "display": "Thu Jun 04",
+    "weekday": "Thu",
+    "week": 7,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "Project deep work: Radius \u2014 implement ALTER TABLE changes (salary, likely_customer 1-5, phone, email, address fields). Create schema.sql, seed.sql, .env, add .env to .gitignore.",
+    "job": null
+  },
+  {
+    "date": "2026-06-05",
+    "display": "Fri Jun 05",
+    "weekday": "Fri",
+    "week": 7,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "Python: sklearn basics. Train/test split, pipeline.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-06",
+    "display": "Sat Jun 06",
+    "weekday": "Sat",
+    "week": 7,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 2.5-3 mi continuous. Every OTHER Saturday: 2-mile time trial (hard).",
+    "project": "ML theory: read 1 chapter from StatQuest or ISLR (Random Forest section).",
+    "job": null
+  },
+  {
+    "date": "2026-06-07",
+    "display": "Sun Jun 07",
+    "weekday": "Sun",
+    "week": 7,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Active recovery: 20 min easy rower + full stretch routine.",
+    "project": "Radius: tune hyperparameters. Document in notebook.",
+    "job": null
+  },
+  {
+    "date": "2026-06-08",
+    "display": "Mon Jun 08",
+    "weekday": "Mon",
+    "week": 7,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "Project deep work: Radius \u2014 implement ALTER TABLE changes (salary, likely_customer 1-5, phone, email, address fields). Create schema.sql, seed.sql, .env, add .env to .gitignore.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-09",
+    "display": "Tue Jun 09",
+    "weekday": "Tue",
+    "week": 8,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "Python: Pandas refresher. Load Radius data, groupby, merge.",
+    "job": null
+  },
+  {
+    "date": "2026-06-10",
+    "display": "Wed Jun 10",
+    "weekday": "Wed",
+    "week": 8,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Rower intervals: 8x500m hard, 1 min rest. OR 30 min steady if legs are toast.",
+    "project": "Python: matplotlib + seaborn. One chart from Radius.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-11",
+    "display": "Thu Jun 11",
+    "weekday": "Thu",
+    "week": 8,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "Radius: re-run model. Evaluate with cross-validation.",
+    "job": null
+  },
+  {
+    "date": "2026-06-12",
+    "display": "Fri Jun 12",
+    "weekday": "Fri",
+    "week": 8,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "Python: sklearn basics. Train/test split, pipeline.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-13",
+    "display": "Sat Jun 13",
+    "weekday": "Sat",
+    "week": 8,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 2.5-3 mi continuous. Every OTHER Saturday: 2-mile time trial (hard).",
+    "project": "Weekly review: commit, update README, draft blog post notes.",
+    "job": null
+  },
+  {
+    "date": "2026-06-14",
+    "display": "Sun Jun 14",
+    "weekday": "Sun",
+    "week": 8,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Active recovery: 20 min easy rower + full stretch routine.",
+    "project": "Project deep work: Radius \u2014 implement ALTER TABLE changes (salary, likely_customer 1-5, phone, email, address fields). Create schema.sql, seed.sql, .env, add .env to .gitignore.",
+    "job": null
+  },
+  {
+    "date": "2026-06-15",
+    "display": "Mon Jun 15",
+    "weekday": "Mon",
+    "week": 8,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "Python: NumPy refresher. 5 array operations.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-16",
+    "display": "Tue Jun 16",
+    "weekday": "Tue",
+    "week": 9,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "Python: Pandas refresher. Load Radius data, groupby, merge.",
+    "job": null
+  },
+  {
+    "date": "2026-06-17",
+    "display": "Wed Jun 17",
+    "weekday": "Wed",
+    "week": 9,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Rower intervals: 8x500m hard, 1 min rest. OR 30 min steady if legs are toast.",
+    "project": "Python: matplotlib + seaborn. One chart from Radius.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-18",
+    "display": "Thu Jun 18",
+    "weekday": "Thu",
+    "week": 9,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "Project deep work: Radius \u2014 implement ALTER TABLE changes (salary, likely_customer 1-5, phone, email, address fields). Create schema.sql, seed.sql, .env, add .env to .gitignore.",
+    "job": null
+  },
+  {
+    "date": "2026-06-19",
+    "display": "Fri Jun 19",
+    "weekday": "Fri",
+    "week": 9,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "Python: sklearn basics. Train/test split, pipeline.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-20",
+    "display": "Sat Jun 20",
+    "weekday": "Sat",
+    "week": 9,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 2.5-3 mi continuous. Every OTHER Saturday: 2-mile time trial (hard).",
+    "project": "ML theory: read 1 chapter from StatQuest or ISLR (Random Forest section).",
+    "job": null
+  },
+  {
+    "date": "2026-06-21",
+    "display": "Sun Jun 21",
+    "weekday": "Sun",
+    "week": 9,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Active recovery: 20 min easy rower + full stretch routine.",
+    "project": "Radius: tune hyperparameters. Document in notebook.",
+    "job": null
+  },
+  {
+    "date": "2026-06-22",
+    "display": "Mon Jun 22",
+    "weekday": "Mon",
+    "week": 9,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "Project deep work: Radius \u2014 implement ALTER TABLE changes (salary, likely_customer 1-5, phone, email, address fields). Create schema.sql, seed.sql, .env, add .env to .gitignore.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-23",
+    "display": "Tue Jun 23",
+    "weekday": "Tue",
+    "week": 10,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "Python: Pandas refresher. Load Radius data, groupby, merge.",
+    "job": null
+  },
+  {
+    "date": "2026-06-24",
+    "display": "Wed Jun 24",
+    "weekday": "Wed",
+    "week": 10,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Rower intervals: 8x500m hard, 1 min rest. OR 30 min steady if legs are toast.",
+    "project": "Python: matplotlib + seaborn. One chart from Radius.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-25",
+    "display": "Thu Jun 25",
+    "weekday": "Thu",
+    "week": 10,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "Radius: re-run model. Evaluate with cross-validation.",
+    "job": null
+  },
+  {
+    "date": "2026-06-26",
+    "display": "Fri Jun 26",
+    "weekday": "Fri",
+    "week": 10,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 4x6 (progress weight), DB Row 4x8, OHP 3x8, Squat 3x10. Push-up ladder: 1,2,3,4,5,4,3,2,1.",
+    "project": "Python: sklearn basics. Train/test split, pipeline.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-27",
+    "display": "Sat Jun 27",
+    "weekday": "Sat",
+    "week": 10,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 2.5-3 mi continuous. Every OTHER Saturday: 2-mile time trial (hard).",
+    "project": "Weekly review: commit, update README, draft blog post notes.",
+    "job": null
+  },
+  {
+    "date": "2026-06-28",
+    "display": "Sun Jun 28",
+    "weekday": "Sun",
+    "week": 10,
+    "phase": 2,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Active recovery: 20 min easy rower + full stretch routine.",
+    "project": "Project deep work: Radius \u2014 implement ALTER TABLE changes (salary, likely_customer 1-5, phone, email, address fields). Create schema.sql, seed.sql, .env, add .env to .gitignore.",
+    "job": null
+  },
+  {
+    "date": "2026-06-29",
+    "display": "Mon Jun 29",
+    "weekday": "Mon",
+    "week": 10,
+    "phase": 2,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Run intervals: 6x400m at target 8:00/mi pace, 90s walk recovery between.",
+    "project": "Python: NumPy refresher. 5 array operations.",
+    "job": "Apply to 1-2 roles. Target: 5/week."
+  },
+  {
+    "date": "2026-06-30",
+    "display": "Tue Jun 30",
+    "weekday": "Tue",
+    "week": 11,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Radius: add visualizations to README (embedded images).",
+    "job": null
+  },
+  {
+    "date": "2026-07-01",
+    "display": "Wed Jul 01",
+    "weekday": "Wed",
+    "week": 11,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Recovery rower: 25 min easy. Light day.",
+    "project": "Radius: record 2-min Loom demo walkthrough.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-02",
+    "display": "Thu Jul 02",
+    "weekday": "Thu",
+    "week": 11,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": null
+  },
+  {
+    "date": "2026-07-03",
+    "display": "Fri Jul 03",
+    "weekday": "Fri",
+    "week": 11,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Radius: clean up notebooks, add markdown explanations.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-04",
+    "display": "Sat Jul 04",
+    "weekday": "Sat",
+    "week": 11,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 3 mi. Alternate weeks: full mock PT test (2-mi run + 1 min push-ups + 1 min sit-ups).",
+    "project": "Radius: final GitHub polish. Pin repo. Write release notes.",
+    "job": null
+  },
+  {
+    "date": "2026-07-05",
+    "display": "Sun Jul 05",
+    "weekday": "Sun",
+    "week": 11,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Full rest. Sleep 8+ hrs tonight.",
+    "project": "Project #2 ideation: brainstorm 3 ideas. Pick one by weekend.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-06",
+    "display": "Mon Jul 06",
+    "weekday": "Mon",
+    "week": 11,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-07",
+    "display": "Tue Jul 07",
+    "weekday": "Tue",
+    "week": 12,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Radius: add visualizations to README (embedded images).",
+    "job": null
+  },
+  {
+    "date": "2026-07-08",
+    "display": "Wed Jul 08",
+    "weekday": "Wed",
+    "week": 12,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Recovery rower: 25 min easy. Light day.",
+    "project": "Radius: record 2-min Loom demo walkthrough.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-09",
+    "display": "Thu Jul 09",
+    "weekday": "Thu",
+    "week": 12,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Radius: write LinkedIn/blog post about the project.",
+    "job": null
+  },
+  {
+    "date": "2026-07-10",
+    "display": "Fri Jul 10",
+    "weekday": "Fri",
+    "week": 12,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Radius: clean up notebooks, add markdown explanations.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-11",
+    "display": "Sat Jul 11",
+    "weekday": "Sat",
+    "week": 12,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 3 mi. Alternate weeks: full mock PT test (2-mi run + 1 min push-ups + 1 min sit-ups).",
+    "project": "Weekly review: commit, log fitness numbers, reflect on job hunt progress.",
+    "job": null
+  },
+  {
+    "date": "2026-07-12",
+    "display": "Sun Jul 12",
+    "weekday": "Sun",
+    "week": 12,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Full rest. Sleep 8+ hrs tonight.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-13",
+    "display": "Mon Jul 13",
+    "weekday": "Mon",
+    "week": 12,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Radius: write professional README. Include problem, approach, results, next steps.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-14",
+    "display": "Tue Jul 14",
+    "weekday": "Tue",
+    "week": 13,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Radius: add visualizations to README (embedded images).",
+    "job": null
+  },
+  {
+    "date": "2026-07-15",
+    "display": "Wed Jul 15",
+    "weekday": "Wed",
+    "week": 13,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Recovery rower: 25 min easy. Light day.",
+    "project": "Radius: record 2-min Loom demo walkthrough.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-16",
+    "display": "Thu Jul 16",
+    "weekday": "Thu",
+    "week": 13,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": null
+  },
+  {
+    "date": "2026-07-17",
+    "display": "Fri Jul 17",
+    "weekday": "Fri",
+    "week": 13,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Radius: clean up notebooks, add markdown explanations.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-18",
+    "display": "Sat Jul 18",
+    "weekday": "Sat",
+    "week": 13,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 3 mi. Alternate weeks: full mock PT test (2-mi run + 1 min push-ups + 1 min sit-ups).",
+    "project": "Radius: final GitHub polish. Pin repo. Write release notes.",
+    "job": null
+  },
+  {
+    "date": "2026-07-19",
+    "display": "Sun Jul 19",
+    "weekday": "Sun",
+    "week": 13,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Full rest. Sleep 8+ hrs tonight.",
+    "project": "Project #2 ideation: brainstorm 3 ideas. Pick one by weekend.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-20",
+    "display": "Mon Jul 20",
+    "weekday": "Mon",
+    "week": 13,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-21",
+    "display": "Tue Jul 21",
+    "weekday": "Tue",
+    "week": 14,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Project #2: data acquisition. Load raw data into pandas.",
+    "job": null
+  },
+  {
+    "date": "2026-07-22",
+    "display": "Wed Jul 22",
+    "weekday": "Wed",
+    "week": 14,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Recovery rower: 25 min easy. Light day.",
+    "project": "Project #2: EDA. Generate summary stats and 3 plots.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-23",
+    "display": "Thu Jul 23",
+    "weekday": "Thu",
+    "week": 14,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project #2: first model baseline.",
+    "job": null
+  },
+  {
+    "date": "2026-07-24",
+    "display": "Fri Jul 24",
+    "weekday": "Fri",
+    "week": 14,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Project #2: iterate on features.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-25",
+    "display": "Sat Jul 25",
+    "weekday": "Sat",
+    "week": 14,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 3 mi. Alternate weeks: full mock PT test (2-mi run + 1 min push-ups + 1 min sit-ups).",
+    "project": "Weekly review: commit, log fitness numbers, reflect on job hunt progress.",
+    "job": null
+  },
+  {
+    "date": "2026-07-26",
+    "display": "Sun Jul 26",
+    "weekday": "Sun",
+    "week": 14,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Full rest. Sleep 8+ hrs tonight.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-27",
+    "display": "Mon Jul 27",
+    "weekday": "Mon",
+    "week": 14,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project #2 setup: repo, README skeleton, data sourcing plan.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-28",
+    "display": "Tue Jul 28",
+    "weekday": "Tue",
+    "week": 15,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Project #2: data acquisition. Load raw data into pandas.",
+    "job": null
+  },
+  {
+    "date": "2026-07-29",
+    "display": "Wed Jul 29",
+    "weekday": "Wed",
+    "week": 15,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Recovery rower: 25 min easy. Light day.",
+    "project": "Project #2: EDA. Generate summary stats and 3 plots.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-07-30",
+    "display": "Thu Jul 30",
+    "weekday": "Thu",
+    "week": 15,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": null
+  },
+  {
+    "date": "2026-07-31",
+    "display": "Fri Jul 31",
+    "weekday": "Fri",
+    "week": 15,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Project #2: iterate on features.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-01",
+    "display": "Sat Aug 01",
+    "weekday": "Sat",
+    "week": 15,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 3 mi. Alternate weeks: full mock PT test (2-mi run + 1 min push-ups + 1 min sit-ups).",
+    "project": "Project #2: model evaluation + error analysis.",
+    "job": null
+  },
+  {
+    "date": "2026-08-02",
+    "display": "Sun Aug 02",
+    "weekday": "Sun",
+    "week": 15,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Full rest. Sleep 8+ hrs tonight.",
+    "project": "Project #2: writeup progress in README.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-03",
+    "display": "Mon Aug 03",
+    "weekday": "Mon",
+    "week": 15,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-04",
+    "display": "Tue Aug 04",
+    "weekday": "Tue",
+    "week": 16,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Project #2: data acquisition. Load raw data into pandas.",
+    "job": null
+  },
+  {
+    "date": "2026-08-05",
+    "display": "Wed Aug 05",
+    "weekday": "Wed",
+    "week": 16,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Recovery rower: 25 min easy. Light day.",
+    "project": "Project #2: EDA. Generate summary stats and 3 plots.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-06",
+    "display": "Thu Aug 06",
+    "weekday": "Thu",
+    "week": 16,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project #2: first model baseline.",
+    "job": null
+  },
+  {
+    "date": "2026-08-07",
+    "display": "Fri Aug 07",
+    "weekday": "Fri",
+    "week": 16,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Project #2: iterate on features.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-08",
+    "display": "Sat Aug 08",
+    "weekday": "Sat",
+    "week": 16,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 3 mi. Alternate weeks: full mock PT test (2-mi run + 1 min push-ups + 1 min sit-ups).",
+    "project": "Weekly review: commit, log fitness numbers, reflect on job hunt progress.",
+    "job": null
+  },
+  {
+    "date": "2026-08-09",
+    "display": "Sun Aug 09",
+    "weekday": "Sun",
+    "week": 16,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Full rest. Sleep 8+ hrs tonight.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-10",
+    "display": "Mon Aug 10",
+    "weekday": "Mon",
+    "week": 16,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project #2 setup: repo, README skeleton, data sourcing plan.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-11",
+    "display": "Tue Aug 11",
+    "weekday": "Tue",
+    "week": 17,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Project #2: data acquisition. Load raw data into pandas.",
+    "job": null
+  },
+  {
+    "date": "2026-08-12",
+    "display": "Wed Aug 12",
+    "weekday": "Wed",
+    "week": 17,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Recovery rower: 25 min easy. Light day.",
+    "project": "Project #2: EDA. Generate summary stats and 3 plots.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-13",
+    "display": "Thu Aug 13",
+    "weekday": "Thu",
+    "week": 17,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": null
+  },
+  {
+    "date": "2026-08-14",
+    "display": "Fri Aug 14",
+    "weekday": "Fri",
+    "week": 17,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Project #2: iterate on features.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-15",
+    "display": "Sat Aug 15",
+    "weekday": "Sat",
+    "week": 17,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 3 mi. Alternate weeks: full mock PT test (2-mi run + 1 min push-ups + 1 min sit-ups).",
+    "project": "Project #2: model evaluation + error analysis.",
+    "job": null
+  },
+  {
+    "date": "2026-08-16",
+    "display": "Sun Aug 16",
+    "weekday": "Sun",
+    "week": 17,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Full rest. Sleep 8+ hrs tonight.",
+    "project": "Project #2: writeup progress in README.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-17",
+    "display": "Mon Aug 17",
+    "weekday": "Mon",
+    "week": 17,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-18",
+    "display": "Tue Aug 18",
+    "weekday": "Tue",
+    "week": 18,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Project #2: data acquisition. Load raw data into pandas.",
+    "job": null
+  },
+  {
+    "date": "2026-08-19",
+    "display": "Wed Aug 19",
+    "weekday": "Wed",
+    "week": 18,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Recovery rower: 25 min easy. Light day.",
+    "project": "Project #2: EDA. Generate summary stats and 3 plots.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-20",
+    "display": "Thu Aug 20",
+    "weekday": "Thu",
+    "week": 18,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project #2: first model baseline.",
+    "job": null
+  },
+  {
+    "date": "2026-08-21",
+    "display": "Fri Aug 21",
+    "weekday": "Fri",
+    "week": 18,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Bench 5x5, Weighted Row 4x6, OHP 4x6, Squat 4x6. Test-prep: 3x max push-ups in 1 min, 2 min rest. Same for sit-ups.",
+    "project": "Project #2: iterate on features.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-22",
+    "display": "Sat Aug 22",
+    "weekday": "Sat",
+    "week": 18,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Long run: 3 mi. Alternate weeks: full mock PT test (2-mi run + 1 min push-ups + 1 min sit-ups).",
+    "project": "Weekly review: commit, log fitness numbers, reflect on job hunt progress.",
+    "job": null
+  },
+  {
+    "date": "2026-08-23",
+    "display": "Sun Aug 23",
+    "weekday": "Sun",
+    "week": 18,
+    "phase": 3,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Full rest. Sleep 8+ hrs tonight.",
+    "project": "Project deep work: advance Project #2 meaningfully.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-24",
+    "display": "Mon Aug 24",
+    "weekday": "Mon",
+    "week": 18,
+    "phase": 3,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Tempo run: 2 mi at goal pace (17:00 target = 8:30/mi). Walk-jog 5 min warmup first.",
+    "project": "Project #2 setup: repo, README skeleton, data sourcing plan.",
+    "job": "Apply to 2-3 roles. Prep any scheduled interviews. Target: 10/week."
+  },
+  {
+    "date": "2026-08-25",
+    "display": "Tue Aug 25",
+    "weekday": "Tue",
+    "week": 19,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Project #2: write professional README.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-08-26",
+    "display": "Wed Aug 26",
+    "weekday": "Wed",
+    "week": 19,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Optional: 20 min easy.",
+    "project": "Project #2: record demo video.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-08-27",
+    "display": "Thu Aug 27",
+    "weekday": "Thu",
+    "week": 19,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-08-28",
+    "display": "Fri Aug 28",
+    "weekday": "Fri",
+    "week": 19,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Interview prep: one LeetCode easy/medium in Python.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-08-29",
+    "display": "Sat Aug 29",
+    "weekday": "Sat",
+    "week": 19,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Every Sat: FULL mock PT test. 2-mi run, rest 5 min, 1-min push-ups, rest 2 min, 1-min sit-ups. LOG RESULTS.",
+    "project": "Interview prep: review system design basics OR ML fundamentals.",
+    "job": null
+  },
+  {
+    "date": "2026-08-30",
+    "display": "Sun Aug 30",
+    "weekday": "Sun",
+    "week": 19,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Rest. Hydrate. Sleep.",
+    "project": "Resume/LinkedIn polish based on application feedback.",
+    "job": null
+  },
+  {
+    "date": "2026-08-31",
+    "display": "Mon Aug 31",
+    "weekday": "Mon",
+    "week": 19,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-01",
+    "display": "Tue Sep 01",
+    "weekday": "Tue",
+    "week": 20,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Project #2: write professional README.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-02",
+    "display": "Wed Sep 02",
+    "weekday": "Wed",
+    "week": 20,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Optional: 20 min easy.",
+    "project": "Project #2: record demo video.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-03",
+    "display": "Thu Sep 03",
+    "weekday": "Thu",
+    "week": 20,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Portfolio site: draft simple landing page linking both projects.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-04",
+    "display": "Fri Sep 04",
+    "weekday": "Fri",
+    "week": 20,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Interview prep: one LeetCode easy/medium in Python.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-05",
+    "display": "Sat Sep 05",
+    "weekday": "Sat",
+    "week": 20,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Every Sat: FULL mock PT test. 2-mi run, rest 5 min, 1-min push-ups, rest 2 min, 1-min sit-ups. LOG RESULTS.",
+    "project": "Weekly review: offer status check. If week 20+ no traction, contact AF recruiter THIS week.",
+    "job": null
+  },
+  {
+    "date": "2026-09-06",
+    "display": "Sun Sep 06",
+    "weekday": "Sun",
+    "week": 20,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Rest. Hydrate. Sleep.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": null
+  },
+  {
+    "date": "2026-09-07",
+    "display": "Mon Sep 07",
+    "weekday": "Mon",
+    "week": 20,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2: final feature push.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-08",
+    "display": "Tue Sep 08",
+    "weekday": "Tue",
+    "week": 21,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Project #2: write professional README.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-09",
+    "display": "Wed Sep 09",
+    "weekday": "Wed",
+    "week": 21,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Optional: 20 min easy.",
+    "project": "Project #2: record demo video.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-10",
+    "display": "Thu Sep 10",
+    "weekday": "Thu",
+    "week": 21,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-11",
+    "display": "Fri Sep 11",
+    "weekday": "Fri",
+    "week": 21,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Interview prep: one LeetCode easy/medium in Python.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-12",
+    "display": "Sat Sep 12",
+    "weekday": "Sat",
+    "week": 21,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Every Sat: FULL mock PT test. 2-mi run, rest 5 min, 1-min push-ups, rest 2 min, 1-min sit-ups. LOG RESULTS.",
+    "project": "Interview prep: review system design basics OR ML fundamentals.",
+    "job": null
+  },
+  {
+    "date": "2026-09-13",
+    "display": "Sun Sep 13",
+    "weekday": "Sun",
+    "week": 21,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Rest. Hydrate. Sleep.",
+    "project": "Resume/LinkedIn polish based on application feedback.",
+    "job": null
+  },
+  {
+    "date": "2026-09-14",
+    "display": "Mon Sep 14",
+    "weekday": "Mon",
+    "week": 21,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-15",
+    "display": "Tue Sep 15",
+    "weekday": "Tue",
+    "week": 22,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Project #2: write professional README.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-16",
+    "display": "Wed Sep 16",
+    "weekday": "Wed",
+    "week": 22,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Optional: 20 min easy.",
+    "project": "Project #2: record demo video.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-17",
+    "display": "Thu Sep 17",
+    "weekday": "Thu",
+    "week": 22,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Portfolio site: draft simple landing page linking both projects.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-18",
+    "display": "Fri Sep 18",
+    "weekday": "Fri",
+    "week": 22,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Interview prep: one LeetCode easy/medium in Python.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-19",
+    "display": "Sat Sep 19",
+    "weekday": "Sat",
+    "week": 22,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Every Sat: FULL mock PT test. 2-mi run, rest 5 min, 1-min push-ups, rest 2 min, 1-min sit-ups. LOG RESULTS.",
+    "project": "Weekly review: offer status check. If week 20+ no traction, contact AF recruiter THIS week.",
+    "job": null
+  },
+  {
+    "date": "2026-09-20",
+    "display": "Sun Sep 20",
+    "weekday": "Sun",
+    "week": 22,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Rest. Hydrate. Sleep.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": null
+  },
+  {
+    "date": "2026-09-21",
+    "display": "Mon Sep 21",
+    "weekday": "Mon",
+    "week": 22,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2: final feature push.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-22",
+    "display": "Tue Sep 22",
+    "weekday": "Tue",
+    "week": 23,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Project #2: write professional README.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-23",
+    "display": "Wed Sep 23",
+    "weekday": "Wed",
+    "week": 23,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Optional: 20 min easy.",
+    "project": "Project #2: record demo video.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-24",
+    "display": "Thu Sep 24",
+    "weekday": "Thu",
+    "week": 23,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-25",
+    "display": "Fri Sep 25",
+    "weekday": "Fri",
+    "week": 23,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Interview prep: one LeetCode easy/medium in Python.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-26",
+    "display": "Sat Sep 26",
+    "weekday": "Sat",
+    "week": 23,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Every Sat: FULL mock PT test. 2-mi run, rest 5 min, 1-min push-ups, rest 2 min, 1-min sit-ups. LOG RESULTS.",
+    "project": "Interview prep: review system design basics OR ML fundamentals.",
+    "job": null
+  },
+  {
+    "date": "2026-09-27",
+    "display": "Sun Sep 27",
+    "weekday": "Sun",
+    "week": 23,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Rest. Hydrate. Sleep.",
+    "project": "Resume/LinkedIn polish based on application feedback.",
+    "job": null
+  },
+  {
+    "date": "2026-09-28",
+    "display": "Mon Sep 28",
+    "weekday": "Mon",
+    "week": 23,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-29",
+    "display": "Tue Sep 29",
+    "weekday": "Tue",
+    "week": 24,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Project #2: write professional README.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-09-30",
+    "display": "Wed Sep 30",
+    "weekday": "Wed",
+    "week": 24,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Optional: 20 min easy.",
+    "project": "Project #2: record demo video.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-01",
+    "display": "Thu Oct 01",
+    "weekday": "Thu",
+    "week": 24,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Portfolio site: draft simple landing page linking both projects.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-02",
+    "display": "Fri Oct 02",
+    "weekday": "Fri",
+    "week": 24,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Interview prep: one LeetCode easy/medium in Python.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-03",
+    "display": "Sat Oct 03",
+    "weekday": "Sat",
+    "week": 24,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Every Sat: FULL mock PT test. 2-mi run, rest 5 min, 1-min push-ups, rest 2 min, 1-min sit-ups. LOG RESULTS.",
+    "project": "Weekly review: offer status check. If week 20+ no traction, contact AF recruiter THIS week.",
+    "job": null
+  },
+  {
+    "date": "2026-10-04",
+    "display": "Sun Oct 04",
+    "weekday": "Sun",
+    "week": 24,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Rest. Hydrate. Sleep.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": null
+  },
+  {
+    "date": "2026-10-05",
+    "display": "Mon Oct 05",
+    "weekday": "Mon",
+    "week": 24,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2: final feature push.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-06",
+    "display": "Tue Oct 06",
+    "weekday": "Tue",
+    "week": 25,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Project #2: write professional README.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-07",
+    "display": "Wed Oct 07",
+    "weekday": "Wed",
+    "week": 25,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Optional: 20 min easy.",
+    "project": "Project #2: record demo video.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-08",
+    "display": "Thu Oct 08",
+    "weekday": "Thu",
+    "week": 25,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-09",
+    "display": "Fri Oct 09",
+    "weekday": "Fri",
+    "week": 25,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Interview prep: one LeetCode easy/medium in Python.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-10",
+    "display": "Sat Oct 10",
+    "weekday": "Sat",
+    "week": 25,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "LONG_RUN",
+    "training": "Every Sat: FULL mock PT test. 2-mi run, rest 5 min, 1-min push-ups, rest 2 min, 1-min sit-ups. LOG RESULTS.",
+    "project": "Interview prep: review system design basics OR ML fundamentals.",
+    "job": null
+  },
+  {
+    "date": "2026-10-11",
+    "display": "Sun Oct 11",
+    "weekday": "Sun",
+    "week": 25,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "REST",
+    "training": "Rest. Hydrate. Sleep.",
+    "project": "Resume/LinkedIn polish based on application feedback.",
+    "job": null
+  },
+  {
+    "date": "2026-10-12",
+    "display": "Mon Oct 12",
+    "weekday": "Mon",
+    "week": 25,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-13",
+    "display": "Tue Oct 13",
+    "weekday": "Tue",
+    "week": 26,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Project #2: write professional README.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-14",
+    "display": "Wed Oct 14",
+    "weekday": "Wed",
+    "week": 26,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "ROWER",
+    "training": "Optional: 20 min easy.",
+    "project": "Project #2: record demo video.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-15",
+    "display": "Thu Oct 15",
+    "weekday": "Thu",
+    "week": 26,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Portfolio site: draft simple landing page linking both projects.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-16",
+    "display": "Fri Oct 16",
+    "weekday": "Fri",
+    "week": 26,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Interview prep: one LeetCode easy/medium in Python.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-17",
+    "display": "Sat Oct 17",
+    "weekday": "Sat",
+    "week": 26,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "LONG_RUN",
+    "training": "Every Sat: FULL mock PT test. 2-mi run, rest 5 min, 1-min push-ups, rest 2 min, 1-min sit-ups. LOG RESULTS.",
+    "project": "Weekly review: offer status check. If week 20+ no traction, contact AF recruiter THIS week.",
+    "job": null
+  },
+  {
+    "date": "2026-10-18",
+    "display": "Sun Oct 18",
+    "weekday": "Sun",
+    "week": 26,
+    "phase": 4,
+    "is_work": false,
+    "training_kind": "REST",
+    "training": "Rest. Hydrate. Sleep.",
+    "project": "Project #2 ship: final polish, public announcement.",
+    "job": null
+  },
+  {
+    "date": "2026-10-19",
+    "display": "Mon Oct 19",
+    "weekday": "Mon",
+    "week": 26,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "RUN",
+    "training": "Sharpener intervals: 4x800m at goal pace, 2 min rest. OR easy 2 mi if fatigued.",
+    "project": "Project #2: final feature push.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  },
+  {
+    "date": "2026-10-20",
+    "display": "Tue Oct 20",
+    "weekday": "Tue",
+    "week": 27,
+    "phase": 4,
+    "is_work": true,
+    "training_kind": "STRENGTH",
+    "training": "Maintenance only: Bench 3x5, Row 3x5, Squat 3x5. Minimal volume. Push-ups/sit-ups 2x max.",
+    "project": "Project #2: write professional README.",
+    "job": "Apply to 3 roles daily. Interview prep. Target: 15/week."
+  }
+];
+
+const PHASE_NAMES = {1: "Base Building", 2: "Build", 3: "Specificity", 4: "Peak + Ship"};
+const TODAY_ISO = new Date().toISOString().slice(0,10);
+
+// Storage helpers — use window.storage with in-memory fallback
+const mem = {};
+async function store_get(key) {
+  try {
+    if (window.storage && window.storage.get) {
+      const r = await window.storage.get(key);
+      return r ? r.value : null;
+    }
+  } catch(e) {}
+  return mem[key] || null;
+}
+async function store_set(key, value) {
+  try {
+    if (window.storage && window.storage.set) {
+      await window.storage.set(key, value);
+      return;
+    }
+  } catch(e) {}
+  mem[key] = value;
+}
+
+// State
+let completed = {}; // key: "YYYY-MM-DD:task_type" -> true
+let ptLog = []; // [{date, run, push, sit}]
+let filter = "all";
+
+async function loadState() {
+  try {
+    const c = await store_get("completed");
+    if (c) completed = JSON.parse(c);
+  } catch(e) {}
+  try {
+    const p = await store_get("ptLog");
+    if (p) ptLog = JSON.parse(p);
+  } catch(e) {}
+}
+async function saveCompleted() {
+  await store_set("completed", JSON.stringify(completed));
+}
+async function savePT() {
+  await store_set("ptLog", JSON.stringify(ptLog));
+}
+
+function dayIndex(iso) {
+  return DAYS.findIndex(d => d.date === iso);
+}
+
+function currentDayIdx() {
+  const today = TODAY_ISO;
+  if (today < "2026-04-21") return 0;
+  if (today > "2026-10-20") return DAYS.length - 1;
+  return dayIndex(today);
+}
+
+function renderStats() {
+  const idx = currentDayIdx();
+  document.getElementById("stat-today").textContent = idx >= 0 ? (idx + 1) : "—";
+  document.getElementById("stat-today-sub").textContent = idx >= 0 ? DAYS[idx].display : "not started";
+  if (idx >= 0) {
+    const ph = DAYS[idx].phase;
+    document.getElementById("stat-phase").textContent = String(ph).padStart(2, '0');
+    document.getElementById("stat-phase-name").textContent = PHASE_NAMES[ph];
+  }
+  const total = Object.keys(completed).filter(k => completed[k]).length;
+  document.getElementById("stat-done").textContent = total;
+  // Total possible tasks
+  let possible = 0;
+  DAYS.forEach(d => {
+    possible += 1; // training
+    if (d.project) possible += 1;
+    if (d.job) possible += 1;
+  });
+  document.getElementById("stat-done-pct").textContent = Math.round(total/possible*100) + "% done";
+
+  // Header today stamp
+  const t = new Date();
+  document.getElementById("today-stamp").textContent = "// TODAY · " + t.toISOString().slice(0,10);
+}
+
+function dayCompletionStatus(d) {
+  const tasks = ["training"];
+  if (d.project) tasks.push("project");
+  if (d.job) tasks.push("job");
+  const done = tasks.filter(t => completed[d.date + ":" + t]).length;
+  return { done, total: tasks.length, full: done === tasks.length };
+}
+
+function renderSchedule() {
+  const container = document.getElementById("schedule");
+  container.innerHTML = "";
+
+  // Filter days
+  let filtered = DAYS;
+  if (filter === "current") {
+    const idx = currentDayIdx();
+    if (idx >= 0) {
+      const curWeek = DAYS[idx].week;
+      filtered = DAYS.filter(d => d.week === curWeek);
+    }
+  } else if (filter.startsWith("phase")) {
+    const p = parseInt(filter.replace("phase", ""));
+    filtered = DAYS.filter(d => d.phase === p);
+  }
+
+  // Group by week
+  const weeks = {};
+  filtered.forEach(d => {
+    if (!weeks[d.week]) weeks[d.week] = [];
+    weeks[d.week].push(d);
+  });
+
+  Object.keys(weeks).sort((a,b)=>a-b).forEach(wk => {
+    const days = weeks[wk];
+    const wkEl = document.createElement("div");
+    wkEl.className = "week";
+    wkEl.id = "week-" + wk;
+
+    // Week progress
+    let wkDone = 0, wkTotal = 0;
+    days.forEach(d => {
+      const s = dayCompletionStatus(d);
+      wkDone += s.done;
+      wkTotal += s.total;
+    });
+
+    const first = days[0], last = days[days.length-1];
+    const phaseName = PHASE_NAMES[first.phase];
+    wkEl.innerHTML = `
+      <div class="week-hdr">
+        <div>
+          <div class="week-num">Week <em>${String(wk).padStart(2, '0')}</em></div>
+          <div class="week-meta">${first.display} — ${last.display} · Phase ${first.phase} / ${phaseName}</div>
+        </div>
+        <div class="week-progress">${wkDone} / ${wkTotal} tasks</div>
+      </div>
+    `;
+
+    days.forEach(d => {
+      const status = dayCompletionStatus(d);
+      const isToday = d.date === TODAY_ISO;
+      const dayEl = document.createElement("div");
+      dayEl.className = "day " + (d.is_work ? "work" : "off") + (isToday ? " today" : "") + (status.full ? " complete" : "");
+
+      const [yyyy, mm, dd] = d.date.split("-");
+      const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+
+      let tasksHtml = "";
+      // Training
+      const tKey = d.date + ":training";
+      tasksHtml += `
+        <div class="task training ${completed[tKey] ? "done" : ""}">
+          <span class="task-check"><input type="checkbox" data-key="${tKey}" ${completed[tKey] ? "checked" : ""}></span>
+          <div class="task-body">
+            <div class="task-label">▶ TRAINING</div>
+            <div class="task-text">${d.training}</div>
+          </div>
+        </div>
+      `;
+      if (d.project) {
+        const pKey = d.date + ":project";
+        tasksHtml += `
+          <div class="task project ${completed[pKey] ? "done" : ""}">
+            <span class="task-check"><input type="checkbox" data-key="${pKey}" ${completed[pKey] ? "checked" : ""}></span>
+            <div class="task-body">
+              <div class="task-label">▶ PROJECT</div>
+              <div class="task-text">${d.project}</div>
+            </div>
+          </div>
+        `;
+      }
+      if (d.job) {
+        const jKey = d.date + ":job";
+        tasksHtml += `
+          <div class="task job ${completed[jKey] ? "done" : ""}">
+            <span class="task-check"><input type="checkbox" data-key="${jKey}" ${completed[jKey] ? "checked" : ""}></span>
+            <div class="task-body">
+              <div class="task-label">▶ JOB HUNT</div>
+              <div class="task-text">${d.job}</div>
+            </div>
+          </div>
+        `;
+      }
+
+      const kindLabel = d.training_kind.replace("_", " ");
+      dayEl.innerHTML = `
+        <div class="day-date">
+          <span class="day-dow">${d.weekday}</span>
+          <span class="day-day">${parseInt(dd)}</span>
+          <span class="day-month">${monthNames[parseInt(mm)-1]}</span>
+          <span class="day-status ${d.is_work ? 'work-tag' : 'off-tag'}">${d.is_work ? 'WORK' : 'OFF'}</span>
+        </div>
+        <div class="day-tasks">${tasksHtml}</div>
+        <div class="day-kind k-${d.training_kind}">${kindLabel}</div>
+      `;
+
+      wkEl.appendChild(dayEl);
+    });
+
+    container.appendChild(wkEl);
+  });
+
+  // Bind checkboxes
+  container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener("change", async (e) => {
+      const key = e.target.dataset.key;
+      if (e.target.checked) completed[key] = true;
+      else delete completed[key];
+      await saveCompleted();
+      renderStats();
+      // Update visual state without full rerender
+      const task = e.target.closest(".task");
+      if (task) task.classList.toggle("done", e.target.checked);
+      const day = e.target.closest(".day");
+      if (day) {
+        const iso = key.split(":")[0];
+        const d = DAYS.find(x => x.date === iso);
+        if (d) {
+          const s = dayCompletionStatus(d);
+          day.classList.toggle("complete", s.full);
+        }
+      }
+      // Update week progress
+      updateWeekProgress();
+    });
+  });
+}
+
+function updateWeekProgress() {
+  document.querySelectorAll(".week").forEach(wkEl => {
+    const wk = parseInt(wkEl.id.replace("week-", ""));
+    const days = DAYS.filter(d => d.week === wk);
+    if (filter.startsWith("phase")) {
+      const p = parseInt(filter.replace("phase", ""));
+      if (days[0] && days[0].phase !== p) return;
+    }
+    let done = 0, total = 0;
+    days.forEach(d => {
+      const s = dayCompletionStatus(d);
+      done += s.done; total += s.total;
+    });
+    const prog = wkEl.querySelector(".week-progress");
+    if (prog) prog.textContent = `${done} / ${total} tasks`;
+  });
+}
+
+function renderPTHistory() {
+  const hist = document.getElementById("pt-history");
+  hist.innerHTML = "";
+  if (ptLog.length === 0) {
+    hist.innerHTML = '<div style="color:var(--ink-faint);font-family:JetBrains Mono,monospace;font-size:11px;padding:8px;">// no benchmarks logged yet</div>';
+    return;
+  }
+  const sorted = [...ptLog].sort((a,b) => b.date.localeCompare(a.date));
+  sorted.forEach((entry, i) => {
+    const originalIdx = ptLog.indexOf(entry);
+    const row = document.createElement("div");
+    row.className = "pt-entry";
+    row.innerHTML = `
+      <span class="pt-date">${entry.date}</span>
+      <span>🏃 ${entry.run || "—"}</span>
+      <span>💪 ${entry.push || "—"} push</span>
+      <span>🔥 ${entry.sit || "—"} sit</span>
+      <button data-idx="${originalIdx}" title="Delete">×</button>
+    `;
+    hist.appendChild(row);
+  });
+  hist.querySelectorAll("button[data-idx]").forEach(btn => {
+    btn.addEventListener("click", async (e) => {
+      const i = parseInt(e.target.dataset.idx);
+      ptLog.splice(i, 1);
+      await savePT();
+      renderPTHistory();
+      renderPTChart();
+    });
+  });
+}
+
+function parseRunTime(str) {
+  if (!str) return null;
+  const m = str.match(/^(\d+):(\d{2})$/);
+  if (!m) return null;
+  return parseInt(m[1]) * 60 + parseInt(m[2]);
+}
+
+function renderPTChart() {
+  const el = document.getElementById("pt-chart");
+  if (ptLog.length < 2) {
+    el.innerHTML = '<div style="color:var(--ink-faint);font-family:JetBrains Mono,monospace;font-size:11px;text-align:center;padding:60px 0;">// log 2+ benchmarks to see trend chart</div>';
+    return;
+  }
+  const sorted = [...ptLog].sort((a,b) => a.date.localeCompare(b.date));
+  // Simple SVG line chart: 3 lines (run, push, sit) normalized
+  const w = el.clientWidth || 600;
+  const h = 160;
+  const pad = 30;
+  const n = sorted.length;
+
+  function xFor(i) { return pad + (i / Math.max(1, n-1)) * (w - 2*pad); }
+
+  // Get min/max for each metric
+  const runs = sorted.map(e => parseRunTime(e.run)).filter(x => x != null);
+  const pushes = sorted.map(e => parseFloat(e.push)).filter(x => !isNaN(x));
+  const sits = sorted.map(e => parseFloat(e.sit)).filter(x => !isNaN(x));
+
+  function scale(arr, v) {
+    if (arr.length === 0) return h/2;
+    const mn = Math.min(...arr), mx = Math.max(...arr);
+    if (mn === mx) return h/2;
+    // Invert for run (lower is better)
+    return h - pad - ((v - mn) / (mx - mn)) * (h - 2*pad);
+  }
+
+  function linePath(values, scaleArr, invert) {
+    let path = "";
+    values.forEach((v, i) => {
+      if (v == null || isNaN(v)) return;
+      let y = scale(scaleArr, v);
+      if (invert) y = h - y + 2*pad - h; // flip for run
+      // Actually simpler: just invert mapping
+      const mn = Math.min(...scaleArr), mx = Math.max(...scaleArr);
+      if (mn !== mx) {
+        const norm = (v - mn) / (mx - mn);
+        y = invert ? (pad + norm * (h - 2*pad)) : (h - pad - norm * (h - 2*pad));
+      } else {
+        y = h/2;
+      }
+      const x = xFor(i);
+      path += (path ? " L" : "M") + x + "," + y;
+    });
+    return path;
+  }
+
+  const runPath = linePath(sorted.map(e => parseRunTime(e.run)), runs, true);
+  const pushPath = linePath(sorted.map(e => parseFloat(e.push)), pushes, false);
+  const sitPath = linePath(sorted.map(e => parseFloat(e.sit)), sits, false);
+
+  el.innerHTML = `
+    <svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}" style="display:block;">
+      <path d="${runPath}" stroke="#c96a4a" stroke-width="2" fill="none" />
+      <path d="${pushPath}" stroke="#7a9aa8" stroke-width="2" fill="none" />
+      <path d="${sitPath}" stroke="#8aa878" stroke-width="2" fill="none" />
+      ${sorted.map((e,i) => {
+        const x = xFor(i);
+        return `<text x="${x}" y="${h-8}" fill="#56534a" font-size="9" font-family="JetBrains Mono, monospace" text-anchor="middle">${e.date.slice(5)}</text>`;
+      }).join("")}
+      <text x="${pad}" y="14" fill="#c96a4a" font-size="10" font-family="JetBrains Mono, monospace">RUN</text>
+      <text x="${pad+50}" y="14" fill="#7a9aa8" font-size="10" font-family="JetBrains Mono, monospace">PUSH</text>
+      <text x="${pad+105}" y="14" fill="#8aa878" font-size="10" font-family="JetBrains Mono, monospace">SIT</text>
+    </svg>
+  `;
+}
+
+// Event handlers
+document.querySelectorAll(".controls button[data-filter]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".controls button[data-filter]").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    filter = btn.dataset.filter;
+    renderSchedule();
+  });
+});
+
+document.getElementById("jump-btn").addEventListener("click", () => {
+  const d = document.getElementById("jump-date").value;
+  if (!d) return;
+  const day = DAYS.find(x => x.date === d);
+  if (!day) return;
+  filter = "all";
+  document.querySelectorAll(".controls button[data-filter]").forEach(b => b.classList.toggle("active", b.dataset.filter === "all"));
+  renderSchedule();
+  setTimeout(() => {
+    const wkEl = document.getElementById("week-" + day.week);
+    if (wkEl) wkEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 100);
+});
+
+document.getElementById("pt-save").addEventListener("click", async () => {
+  const date = document.getElementById("pt-date").value;
+  const run = document.getElementById("pt-run").value;
+  const push = document.getElementById("pt-push").value;
+  const sit = document.getElementById("pt-sit").value;
+  if (!date) { alert("Pick a date"); return; }
+  ptLog.push({ date, run, push, sit });
+  await savePT();
+  renderPTHistory();
+  renderPTChart();
+  document.getElementById("pt-run").value = "";
+  document.getElementById("pt-push").value = "";
+  document.getElementById("pt-sit").value = "";
+});
+
+// Set default PT log date
+document.getElementById("pt-date").value = TODAY_ISO;
+
+// Init
+(async () => {
+  await loadState();
+  renderStats();
+  renderSchedule();
+  renderPTHistory();
+  renderPTChart();
+  // Auto-scroll to current week on load
+  const idx = currentDayIdx();
+  if (idx >= 0) {
+    setTimeout(() => {
+      const wkEl = document.getElementById("week-" + DAYS[idx].week);
+      if (wkEl) wkEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 300);
+  }
+})();
+</script>
+</body>
+</html>
